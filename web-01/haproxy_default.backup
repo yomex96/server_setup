@@ -1,0 +1,28 @@
+# Default settings
+defaults
+    log global
+    mode http
+    option httplog
+    option dontlognull
+    timeout connect 5000
+    timeout client 50000
+    timeout server 50000
+    errorfile 400 /etc/haproxy/errors/400.http
+    errorfile 403 /etc/haproxy/errors/403.http
+    errorfile 408 /etc/haproxy/errors/408.http
+    errorfile 500 /etc/haproxy/errors/500.http
+    errorfile 502 /etc/haproxy/errors/502.http
+    errorfile 503 /etc/haproxy/errors/503.http
+    errorfile 504 /etc/haproxy/errors/504.http
+
+# Frontend configuration
+frontend myrobert.tech-frontend
+    bind *:80
+    default_backend myrobert.tech-backend 
+         
+      
+# Backend configuration
+backend myrobert.tech-backend
+    balance roundrobin
+    server 45099-web-02 54.172.150.81:80 check
+    server 45099-web-01 54.173.104.114:80 check

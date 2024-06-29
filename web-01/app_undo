@@ -1,0 +1,33 @@
+echo "Undoing the Changes..."
+
+# Remove Gunicorn tmux session for task 4
+tmux kill-session -t gunicorn_api
+
+# Remove the Nginx configuration changes
+sudo rm /etc/nginx/sites-available/default
+
+# Restart Nginx to revert the changes
+sudo systemctl restart nginx
+
+# Remove cloned repositories
+rm -rf /home/ubuntu/AirBnB_clone_v2
+rm -rf /home/ubuntu/AirBnB_clone_v3
+rm -rf /home/ubuntu/AirBnB_clone_v4
+
+# Uninstall Gunicorn
+sudo apt-get remove --purge -y gunicorn
+
+# Uninstall net-tools
+sudo apt-get remove --purge -y net-tools
+
+# Uninstall Flask, flask_cors, sqlalchemy using pip
+pip uninstall -y flask flask_cors sqlalchemy
+
+# Uninstall pip
+sudo apt-get remove --purge -y python3-pip
+
+# Uninstall Nginx
+sudo apt-get remove --purge -y nginx
+
+echo "Undo process completed successfully."
+
